@@ -6,14 +6,16 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
+@Document(collection = "Dealer")
 public class Dealer {
-    @Id
-    private int id;
+
+    @Id private int id;
     private String dealerName;
+    private String address;
+    private String phoneNo;
     private String item;
     private int quantity;
     private double total;
@@ -32,6 +34,22 @@ public class Dealer {
 
     public void setDealerName(String dealerName) {
         this.dealerName = dealerName;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getPhoneNo() {
+        return phoneNo;
+    }
+
+    public void setPhoneNo(String phoneNo) {
+        this.phoneNo = phoneNo;
     }
 
     public String getItem() {
@@ -57,4 +75,5 @@ public class Dealer {
     public void setTotal(double total) {
         this.total = total;
     }
+
 }

@@ -1,10 +1,8 @@
 package com.beverageStock.dealer.repository;
 
 import com.beverageStock.dealer.entity.Dealer;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
+import org.springframework.data.mongodb.repository.MongoRepository;
 
-@Repository
-public interface DealerRepository extends JpaRepository<Dealer, Integer> {
+public interface DealerRepository extends MongoRepository<Dealer, Integer> {
 
 }
