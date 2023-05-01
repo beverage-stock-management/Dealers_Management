@@ -4,7 +4,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
+@Document
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -12,7 +14,7 @@ public class Dealer {
     @Id
     private int id;
     private String dealerName;
-    private String product;
+    private String item;
     private int quantity;
     private double total;
 
@@ -32,12 +34,12 @@ public class Dealer {
         this.dealerName = dealerName;
     }
 
-    public String getProduct() {
-        return product;
+    public String getItem() {
+        return item;
     }
 
-    public void setProduct(String product) {
-        this.product = product;
+    public void setItem(String item) {
+        this.item = item;
     }
 
     public int getQuantity() {
