@@ -5,19 +5,39 @@ import com.beverageStock.dealer.repository.DealerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
+@RestController
 public class DealerController {
 
     @Autowired
     private DealerRepository dealerRepository;
 
-    @CrossOrigin
     @PostMapping("/addDealerDetails")
-    public Dealer addDealerDetails(@RequestBody Dealer dealer) {
-        return dealerRepository.save(dealer);
+    public String addDealerDetails(@RequestBody Dealer dealer) {
+        dealerRepository.save(dealer);
+        return "Added Successfully";
     }
 
-//    @GetMapping("/addDealerDetails/{id}")
-//    public Dealer getDealerDetails(@PathVariable Integer id) {
-//        return dealerRepository.getAccDetailsById(id);
-//    }
+    @GetMapping("/getDealerDetails/{id}")
+    public Object getDealerDetails(@PathVariable Integer id) {
+        return dealerRepository.findById(id);
+    }
+
+    @GetMapping("/getAllDealerDetails")
+    public List<Dealer> getAllDealerDetails() {
+        return dealerRepository.findAll();
+    }
+
+    @PutMapping("updateDealerDetails")
+    public String updateDealerDetails(@RequestBody Dealer dealer) {
+        dealerRepository.save(dealer);
+        return "Updated Successfully";
+    }
+
+    @DeleteMapping ("/deleteDealerDetails/{id}")
+    public String deleteDealerDetails(@PathVariable Integer id) {
+        dealerRepository.deleteById(id);
+        return "Deleted Successfully";
+    }
 }
