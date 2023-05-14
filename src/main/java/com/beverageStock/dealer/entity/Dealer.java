@@ -17,6 +17,7 @@ public class Dealer {
     private String address;
     private String phoneNo;
     private String item;
+    private double itemPrice;
     private int quantity;
     private double total;
 }
