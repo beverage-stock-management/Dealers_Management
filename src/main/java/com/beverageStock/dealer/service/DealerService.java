@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class DealerService {
@@ -15,12 +16,13 @@ public class DealerService {
     private DealerRepository dealerRepository;
 
     public String addDealerDetails(Dealer dealer) {
+        dealer.setId(UUID.randomUUID().toString().split("-")[0]);
         dealer.setTotal(dealer.getQuantity()* dealer.getItemPrice());
         dealerRepository.save(dealer);
         return "Added Successfully";
     }
 
-    public Object getDetailsById(Integer id){
+    public Object getDetailsById(String id){
         Optional<Dealer> dealer = dealerRepository.findById(id);
         return dealer.isPresent() == true ? dealer : "User not found!.";
     }
@@ -29,13 +31,23 @@ public class DealerService {
         return dealerRepository.findAll();
     }
 
-    public String updateDealerDetails(Dealer dealer){
-        dealer.setTotal(dealer.getQuantity()* dealer.getItemPrice());
-        dealerRepository.save(dealer);
+    public String updateDealerDetails(String id, Dealer dealer){
+
+        Dealer existingDealer = dealerRepository.findById(id).get();
+
+        existingDealer.setDealerName(dealer.getDealerName());
+        existingDealer.setAddress(dealer.getAddress());
+        existingDealer.setPhoneNo(dealer.getPhoneNo());
+        existingDealer.setItem(dealer.getItem());
+        existingDealer.setItemPrice(dealer.getItemPrice());
+        existingDealer.setQuantity(dealer.getQuantity());
+        existingDealer.setTotal(existingDealer.getQuantity() * existingDealer.getItemPrice());
+
+        dealerRepository.save(existingDealer);
         return "Updated Successfully";
     }
 
-    public String deleteDealerDetails(Integer id) {
+    public String deleteDealerDetails(String id) {
         dealerRepository.deleteById(id);
         return "Deleted Successfully";
     }

@@ -19,7 +19,7 @@ public class DealerController {
     }
 
     @GetMapping("/getDetailsById/{id}")
-    public Object getDetailsById(@PathVariable Integer id) {
+    public Object getDetailsById(@PathVariable String id) {
         return dealerService.getDetailsById(id);
     }
 
@@ -28,13 +28,13 @@ public class DealerController {
         return dealerService.getAllDealerDetails();
     }
 
-    @PutMapping("updateDealerDetails")
-    public String updateDealerDetails(@RequestBody Dealer dealer) {
-        return dealerService.updateDealerDetails(dealer);
+    @PutMapping("updateDealerDetails/{id}")
+    public String updateDealerDetails(@PathVariable String id, @RequestBody Dealer dealer) {
+        return dealerService.updateDealerDetails(id,dealer);
     }
 
     @DeleteMapping ("/deleteDealerDetails/{id}")
-    public String deleteDealerDetails(@PathVariable Integer id) {
+    public String deleteDealerDetails(@PathVariable String id) {
         return dealerService.deleteDealerDetails(id);
     }
 }
