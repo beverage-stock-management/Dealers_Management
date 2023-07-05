@@ -1,7 +1,7 @@
 package com.beverageStock.dealer.controller;
 
 import com.beverageStock.dealer.entity.Dealer;
-import com.beverageStock.dealer.repository.DealerRepository;
+import com.beverageStock.dealer.service.DealerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,33 +11,30 @@ import java.util.List;
 public class DealerController {
 
     @Autowired
-    private DealerRepository dealerRepository;
+    private DealerService dealerService;
 
     @PostMapping("/addDealerDetails")
     public String addDealerDetails(@RequestBody Dealer dealer) {
-        dealerRepository.save(dealer);
-        return "Added Successfully";
+        return dealerService.addDealerDetails(dealer);
     }
 
-    @GetMapping("/getDealerDetails/{id}")
-    public Object getDealerDetails(@PathVariable Integer id) {
-        return dealerRepository.findById(id);
+    @GetMapping("/getDetailsById/{id}")
+    public Object getDetailsById(@PathVariable String id) {
+        return dealerService.getDetailsById(id);
     }
 
     @GetMapping("/getAllDealerDetails")
     public List<Dealer> getAllDealerDetails() {
-        return dealerRepository.findAll();
+        return dealerService.getAllDealerDetails();
     }
 
-    @PutMapping("updateDealerDetails")
-    public String updateDealerDetails(@RequestBody Dealer dealer) {
-        dealerRepository.save(dealer);
-        return "Updated Successfully";
+    @PutMapping("updateDealerDetails/{id}")
+    public String updateDealerDetails(@PathVariable String id, @RequestBody Dealer dealer) {
+        return dealerService.updateDealerDetails(id,dealer);
     }
 
     @DeleteMapping ("/deleteDealerDetails/{id}")
-    public String deleteDealerDetails(@PathVariable Integer id) {
-        dealerRepository.deleteById(id);
-        return "Deleted Successfully";
+    public String deleteDealerDetails(@PathVariable String id) {
+        return dealerService.deleteDealerDetails(id);
     }
 }
